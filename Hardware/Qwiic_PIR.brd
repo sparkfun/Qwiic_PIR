@@ -9,10 +9,10 @@
 </settings>
 <grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.0025" altunitdist="inch" altunit="inch"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
-<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
+<layer number="1" name="Top" color="4" fill="1" visible="no" active="yes"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="no" active="yes"/>
 <layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
-<layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="18" name="Vias" color="2" fill="1" visible="no" active="yes"/>
 <layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
 <layer number="20" name="Dimension" color="24" fill="1" visible="yes" active="yes"/>
 <layer number="21" name="tPlace" color="16" fill="1" visible="yes" active="yes"/>
@@ -199,12 +199,12 @@
 <rectangle x1="19.2405" y1="19.05" x2="20.32" y2="20.1295" layer="29"/>
 <rectangle x1="19.2405" y1="17.2085" x2="20.32" y2="18.288" layer="29"/>
 <rectangle x1="19.2405" y1="19.05" x2="20.32" y2="20.1295" layer="31"/>
-<wire x1="9.2075" y1="11.557" x2="7.9375" y2="11.557" width="0.254" layer="21"/>
-<wire x1="7.9375" y1="11.557" x2="8.255" y2="11.8745" width="0.254" layer="21"/>
-<wire x1="7.9375" y1="11.557" x2="8.255" y2="11.2395" width="0.254" layer="21"/>
-<wire x1="7.0485" y1="13.208" x2="7.0485" y2="14.478" width="0.254" layer="21"/>
-<wire x1="7.0485" y1="14.478" x2="7.366" y2="14.1605" width="0.254" layer="21"/>
-<wire x1="7.0485" y1="14.478" x2="6.731" y2="14.1605" width="0.254" layer="21"/>
+<wire x1="7.747" y1="12.1285" x2="6.477" y2="12.1285" width="0.254" layer="21"/>
+<wire x1="6.477" y1="12.1285" x2="6.7945" y2="12.446" width="0.254" layer="21"/>
+<wire x1="6.477" y1="12.1285" x2="6.7945" y2="11.811" width="0.254" layer="21"/>
+<wire x1="8.128" y1="12.6365" x2="8.128" y2="13.9065" width="0.254" layer="21"/>
+<wire x1="8.128" y1="13.9065" x2="8.4455" y2="13.589" width="0.254" layer="21"/>
+<wire x1="8.128" y1="13.9065" x2="7.8105" y2="13.589" width="0.254" layer="21"/>
 <dimension x1="2.54" y1="22.86" x2="2.54" y2="25.4" x3="-2.54" y3="24.13" textsize="1.778" layer="47" unit="inch"/>
 <dimension x1="2.54" y1="22.86" x2="0" y2="22.86" x3="1.27" y3="34.29" textsize="1.778" layer="47" unit="inch"/>
 </plain>
@@ -4069,8 +4069,8 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <element name="U$13" library="output" package="PIR0" value="" x="12.319" y="18.9865" smashed="yes" rot="MR0"/>
 <element name="U$2" library="output" package="170UA0" value="" x="19.812" y="19.6215" smashed="yes"/>
 <element name="U$9" library="output" package="1UA0" value="" x="19.812" y="17.78" smashed="yes"/>
-<element name="U$14" library="output" package="X0" value="" x="6.858" y="13.843" smashed="yes"/>
-<element name="U$16" library="output" package="Y0" value="" x="7.62" y="12.7" smashed="yes"/>
+<element name="U$14" library="output" package="X0" value="" x="7.9375" y="13.2715" smashed="yes"/>
+<element name="U$16" library="output" package="Y0" value="" x="6.604" y="11.4935" smashed="yes"/>
 <element name="U$17" library="output" package="QWIIC0" value="" x="-0.381" y="19.3675" smashed="yes"/>
 <element name="U$18" library="output" package="QWIIC0" value="" x="16.764" y="19.05" smashed="yes" rot="MR0"/>
 <element name="U$19" library="output" package="#GND#0" value="" x="7.62" y="1.778" smashed="yes" rot="MR90"/>
