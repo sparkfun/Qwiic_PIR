@@ -1,41 +1,42 @@
-SparkFun <PRODUCT NAME>
+SparkFun Qwiic PIR - 1&micro;A (EKMB1107112) & 170&micro;A (EKMC4607112K)
 ========================================
 
-![SparkFun Part Name](URL for picture of part)
+<table class="table table-hover table-striped table-bordered">
+    <tr align="center">
+      <td><a href="https://www.sparkfun.com/products/17375"><img src="https://cdn.sparkfun.com/assets/parts/1/6/4/0/7/17375-SparkFun_Qwiic_PIR_-_1uA__EKMB1107112_-01.jpg"></a></td>
+      <td><a href="https://www.sparkfun.com/products/17374"><img src="https://cdn.sparkfun.com/assets/parts/1/6/4/0/6/17374-SparkFun_Qwiic_PIR_-_170uA__EKMC4607112K_-01A.jpg"></a></td>
+    </tr>
+    <tr align="center">
+      <td><a href="https://www.sparkfun.com/products/17375">SparkFun Qwiic PIR - 1&micro;A (EKMB1107112)</a></td>
+      <td><a href="https://www.sparkfun.com/products/17374">SparkFun Qwiic PIR - 170&micro;A (EKMC4607112K)</a></td>
+    </tr>
+</table>
 
-[*SparkFun Part Name (SKU)*](URL for product on Sparkfun.com)
-
-<Basic description of the part.>
+The SparkFun Qwiic PIRs feature low-profile EKM-series PIR sensors from Panasonic for motion sensing projects using I<sup>2</sup>C. The two versions offer motion-sensing options for both battery powered (SparkFun Qwiic PIR - 1&micro;A (EKMB1107112)) and continuously powered (SparkFun Qwiic PIR - 170&micro;A (EKMC4607112K)) applications. The Qwiic PIR features an ATTiny84 to translate the PIR's digital output signal into I<sup>2</sup>C data so it can be integrated into an existing Qwiic or I<sup>2</sup>C bus.
 
 Repository Contents
 -------------------
 
 * **/Documentation** - Data sheets, additional product information
-* **/Enclosure** - Enclosure files 
-* **/Firmware** - Example code 
+* **/Firmware** - Qwiic PIR Firmware
 * **/Hardware** - Eagle design files (.brd, .sch)
-* **/Libraries** - Libraries for use with the <PRODUCT NAME>
 * **/Production** - Production panel files (.brd)
-* **/Software** - Related software for the <PRODUCT NAME>
 
 Documentation
 --------------
-* **[Library](GitHub library URL)** - <LANGUAGE> library for the <PRODUCT NAME>.
-* **[Hookup Guide](Learn.SparkFun URL)** - Basic hookup guide for the <PRODUCT NAME>.
+* **[Qwiic PIR Arduino Library](https://github.com/sparkfun/SparkFun_Qwiic_PIR_Arduino_Library)** - Arduino library for the SparkFun Qwiic PIR.
+* **[Qwiic PIR Python Library](https://github.com/sparkfun/Qwiic_PIR_Py)** - Python library for the SparkFun Qwiic PIR.
+* **[Hookup Guide](https://learn.sparkfun.com/tutorials/qwiic-pir-hookup-guide)** - Basic hookup guide for the SparkFun Qwiic PIR.
 * **[SparkFun Fritzing repo](https://github.com/sparkfun/Fritzing_Parts)** - Fritzing diagrams for SparkFun products.
-* **[SparkFun 3D Model repo](https://github.com/sparkfun/3D_Models)** - 3D models of SparkFun products. 
-* **[SparkFun Graphical Datasheets](https://github.com/sparkfun/Graphical_Datasheets)** -Graphical Datasheets for various SparkFun products.
 
 Product Versions
 ----------------
-* [Part SKU](part URL)- Basic part and short description here
-* [Retail part SKU](retail URL)- Retail packaging of standard description here
-* [Any other parts this repo covers](any other URLs) - Description of said parts
+* [SEN-17374](https://www.sparkfun.com/products/17374) - 170&micro;A version
+* [SEN-17375](https://www.sparkfun.com/products/17375) - 1&micro;A version
 
 Version History
 ---------------
-* [vExxFxxZxxHxxLxxSxx](URL for tag specific to this version) - Description 
-* [vEyyFyyZyyHyyLyySyy](URL for tag specific to this version) - Description
+* [v10](https://www.sparkfun.com/products/17374) - Initial release of SparkFun Qwiic PIR - 170&micro;A
 
 License Information
 -------------------
@@ -49,5 +50,3 @@ If you have any questions or concerns on licensing, please contact technical sup
 Distributed as-is; no warranty is given.
 
 - Your friends at SparkFun.
-
-_<COLLABORATION CREDIT>_
