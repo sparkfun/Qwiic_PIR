@@ -91,8 +91,8 @@ volatile memoryMap registerMap {
   FIRMWARE_MINOR,      //firmwareMinor
   FIRMWARE_MAJOR,      //firmwareMajor
   {0, 0, 0, 0},           //eventStatus {objectDetected, objectRemoved, eventAvailable, rawReading}
-  {1, 1},              //interruptConfig {detectEnable, detectEnable}
-  0x01F4,              //eventDebounceTime, default: 500ms
+  {1},              //interruptConfig {detectEnable, detectEnable}
+  0x02EE,              //eventDebounceTime, default: 750ms
   {0, 1, 0},           //eventQueueStatus {isFull, isEmpty, popRequest}
   0x00000000,          //eventQueueFront
   0x00000000,          //eventQueueBack
@@ -108,7 +108,7 @@ memoryMap protectionMap = {
   0x00,       //firmwareMinor
   0x00,       //firmwareMajor
   {1, 1, 1, 0},  //eventStatus {objectDetected, objectRemoved, eventAvailable, rawReading}
-  {1, 1},     //interruptConfig {detectEnable, detectEnable}
+  {1},        //interruptConfig 
   0xFFFF,     //eventDebounceTime
   {0, 0, 1},  //detectQueueStatus {isFull, isEmpty, popRequest}
   0x00000000, //detectQueueFront
@@ -196,8 +196,7 @@ void loop(void)
   }
   
   //update interruptPin output
-  if ((registerMap.eventStatus.objectDetected && registerMap.interruptConfigure.detectEnable) || 
-  (registerMap.eventStatus.objectRemoved && registerMap.interruptConfigure.removeEnable))
+  if (registerMap.eventStatus.eventAvailable && registerMap.interruptConfigure.interruptEnable)
   { //if the interrupt is triggered
     pinMode(interruptPin, OUTPUT); //make the interrupt pin a low-impedance connection to ground
     digitalWrite(interruptPin, LOW);

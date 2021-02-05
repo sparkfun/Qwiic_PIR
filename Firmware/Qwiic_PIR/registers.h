@@ -32,9 +32,8 @@ typedef union {
 
 typedef union {
   struct {
-    bool detectEnable : 1; //user mutable, set to 1 to enable an interrupt when the button is pressed. Defaults to 0.
-    bool removeEnable : 1; //user mutable, set to 1 to enable an interrupt when the button is pressed. Defaults to 0.
-    bool: 6;
+    bool interruptEnable : 1; //user mutable, set to 1 to enable an interrupt when an object is detected. Defaults to 0.
+    bool: 7;
   };
   uint8_t byteWrapped;
 } interruptConfigBitField;
@@ -58,7 +57,7 @@ typedef struct memoryMap {
   statusRegisterBitField eventStatus;                    // 0x03
 
   //Interrupt Configuration
-  interruptConfigBitField interruptConfigure;                // 0x04
+  interruptConfigBitField interruptConfigure;            // 0x04
   uint16_t eventDebounceTime;                            // 0x05
 
   //PIREvents queue manipulation and status functions

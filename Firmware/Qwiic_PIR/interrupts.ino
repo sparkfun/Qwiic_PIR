@@ -107,13 +107,15 @@ void eventInterrupt() {
   {
     case 0:
       registerMap.eventStatus.objectRemoved = true;
-      removedEvents.push(lastEventTime);
+      registerMap.eventStatus.objectDetected = false;
+      removedEvents.push(lastEventTime - registerMap.eventDebounceTime);
       registerMap.removedQueueStatus.isEmpty = removedEvents.isEmpty();
       registerMap.removedQueueStatus.isFull = removedEvents.isFull();
       break;
     case 1:
       registerMap.eventStatus.objectDetected = true;
-      detectEvents.push(lastEventTime);
+      registerMap.eventStatus.objectRemoved = false;
+      detectEvents.push(lastEventTime - registerMap.eventDebounceTime);
       registerMap.detectQueueStatus.isEmpty = detectEvents.isEmpty();
       registerMap.detectQueueStatus.isFull = detectEvents.isFull();
       break;
