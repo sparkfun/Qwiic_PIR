@@ -1,19 +1,19 @@
 /*
-  An I2C based Button
+  An I2C based PIR
   By: Nathan Seidle and Fischer Moseley and Priyanka Makin
   SparkFun Electronics
-  Date: July 31st, 2019
+  Date: February 10, 2021
   License: This code is public domain but you buy me a beer if you use this and
   we meet someday (Beerware license).
 
-  Qwiic Button is an I2C based button that records any button presses to a queue.
+  Qwiic PIR is an I2C based pir that records any PIR events to a queue
 
-  Qwiic Button maintains a queue of events. To remove events from the queue write
-  the appropriate register (timeSinceLastButtonClicked or timeSinceLastPIREvents)
+  Qwiic PIR maintains a queue of events. To remove events from the queue write
+  the appropriate register (timeSinceLastPIREvent)
   to zero. The register will then be filled with the next available event time.
 
   There is also an accompanying Arduino Library located here:
-  https://github.com/sparkfun/SparkFun_Qwiic_Button_Arduino_Library
+  https://github.com/sparkfun/SparkFun_Qwiic_PIR_Arduino_Library
 
   Feel like supporting our work? Buy a board from SparkFun!
   https://www.sparkfun.com/products/14641
@@ -30,12 +30,10 @@
   Wire.h        Used for interfacing with the I2C hardware for responding to I2C events.
   EEPROM.h      Used for interfacing with the onboard EEPROM for storing and retrieving settings.
   nvm.h         Used for defining the storage locations in non-volatile memory (EEPROM) to store and retrieve settings from.
-  queue.h       Used for defining a FIFO-queue that contains the timestamps associated with pressing and clicking the button.
+  queue.h       Used for defining a FIFO-queue that contains the timestamps associated with PIR events
   registers.h   Used for defining a memoryMap object that serves as the register map for the device.
-  led.h         Used for configuring the behavior of the onboard LED (in the case of the Qwiic Button)
-                  or the offboard LED (in the case of the Qwiic Switch)
 
-  PinChangeInterrupt.h    Nico Hoo's library for triggering an interrupt on a pin state change (either low->high or high->low)
+  PinChangeInterrupt.h    Nico Hood's library for triggering an interrupt on a pin state change (either low->high or high->low)
   avr/sleep.h             Needed for sleep_mode which saves power on the ATTiny
   avr/power.hardware      Needed for powering down peripherals such as the ADC/TWI and Timers on the ATTiny
 */
@@ -47,7 +45,7 @@
 #include "registers.h"
 
 #include "PinChangeInterrupt.h" //Nico Hood's library: https://github.com/NicoHood/PinChangeInterrupt/
-//Used for pin change interrupts on ATtinys (encoder button causes interrupt)
+//Used for pin change interrupts on ATtinys
 //Note: To make this code work with Nico's library you have to comment out https://github.com/NicoHood/PinChangeInterrupt/blob/master/src/PinChangeInterruptSettings.h#L228
 
 #include <avr/sleep.h> //Needed for sleep_mode
@@ -55,7 +53,7 @@
 
 #define DEVICE_ID 0x72
 #define FIRMWARE_MAJOR 0x01 //Firmware Version. Helpful for tech support.
-#define FIRMWARE_MINOR 0x00
+#define FIRMWARE_MINOR 0x01
 
 #define DEFAULT_I2C_ADDRESS 0x12
 
@@ -110,10 +108,10 @@ memoryMap protectionMap = {
   {1, 1, 1, 0},  //eventStatus {objectDetected, objectRemoved, eventAvailable, rawReading}
   {1},        //interruptConfig 
   0xFFFF,     //eventDebounceTime
-  {0, 0, 1},  //detectQueueStatus {isFull, isEmpty, popRequest}
+  {1, 0, 0},  //detectQueueStatus {isFull, isEmpty, popRequest}
   0x00000000, //detectQueueFront
   0x00000000, //detectQueueBack
-  {0, 0, 1},  //removeQueueStatus {isFull, isEmpty, popRequest}
+  {1, 0, 0},  //removeQueueStatus {isFull, isEmpty, popRequest}
   0x00000000, //removeQueueFront
   0x00000000, //removeQueueBack
   0xFF,       //i2cAddress
@@ -127,8 +125,8 @@ volatile uint8_t registerNumber; //Gets set when user writes an address. We then
 
 volatile boolean updateFlag = true; //Goes true when we receive new bytes from user. Causes LEDs and things to update in main loop.
 
-volatile Queue detectEvents; //Init FIFO buffer for storing timestamps associated with button presses and clicks
-volatile Queue removedEvents; //Init FIFO buffer for storing timestamps associated with button presses and clicks
+volatile Queue detectEvents; //Init FIFO buffer for storing timestamps associated with PIR detect events
+volatile Queue removedEvents; //Init FIFO buffer for storing timestamps associated with PIR remove events
 
 volatile unsigned long lastEventTime = 0; //Used for debouncing
 
@@ -164,7 +162,7 @@ void setup(void)
   }
 
   Serial.begin(115200);
-  Serial.println("Qwiic Button");
+  Serial.println("Qwiic PIR");
   Serial.print("Address: 0x");
   Serial.println(registerMap.i2cAddress, HEX);
   Serial.print("Device ID: 0x");
@@ -234,8 +232,7 @@ void startI2C(memoryMap *map)
     EEPROM.put(LOCATION_ADDRESS_TYPE, SOFTWARE_ADDRESS);
   }
 
-  //Button PCB has 4 jumpers, the arcade/micro switch PCB has one. But we check all pins even when there
-  //is no jumper (will always be high).
+  //PIR PCB has one jumper.
   uint8_t IOaddress = DEFAULT_I2C_ADDRESS;
   bitWrite(IOaddress, 0, digitalRead(addressPin));
 

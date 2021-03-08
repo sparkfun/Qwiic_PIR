@@ -4,7 +4,7 @@
   Original Creation Date: July 31, 2019
 
   This file contains the interrupt routines that are triggered upon an I2C write from
-  master (receiveEvent), an I2C read (requestEvent), or a button state change
+  master (receiveEvent), an I2C read (requestEvent), or a PIR state change
   (eventInterrupt). These ISRs modify the registerMap state variable, and sometimes
   set a flag (updateFlag) that updates things in the main loop.
 
@@ -20,7 +20,7 @@ void setupInterrupts() {
   attachPCINT(digitalPinToPCINT(pirPin), eventInterrupt, CHANGE);
 }
 
-//When Qwiic Button receives data bytes from Master, this function is called as an interrupt
+//When Qwiic PIR receives data bytes from Master, this function is called as an interrupt
 void receiveEvent(int numberOfBytesReceived) {
   registerNumber = Wire.read(); //Get the memory map offset from the user
 
@@ -37,7 +37,7 @@ void receiveEvent(int numberOfBytesReceived) {
     }
   }
 
-  //Update the PIREvents and ButtonClicked queues.
+  //Update the PIREvents and detect/remove queues.
   
   //If the user has requested to pop the oldest event off the stack then do so!
   if (registerMap.detectQueueStatus.popRequest) {
@@ -71,7 +71,7 @@ void receiveEvent(int numberOfBytesReceived) {
 }
 
 //Respond to GET commands
-//When Qwiic Button gets a request for data from the user, this function is called as an interrupt
+//When Qwiic PIR gets a request for data from the user, this function is called as an interrupt
 //The interrupt will respond with bytes starting from the last byte the user sent to us
 //While we are sending bytes we may have to do some calculations
 void requestEvent() {

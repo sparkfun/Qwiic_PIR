@@ -49,7 +49,7 @@ typedef union {
 } queueStatusBitField;
 
 typedef struct memoryMap {
-  //Button Status/Configuration                       Register Address
+  //PIR Status/Configuration                       Register Address
   uint8_t id;                                             // 0x00
   uint8_t firmwareMinor;                                  // 0x01
   uint8_t firmwareMajor;                                  // 0x02
