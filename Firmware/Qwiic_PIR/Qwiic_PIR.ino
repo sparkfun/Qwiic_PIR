@@ -1,6 +1,6 @@
 /*
   An I2C based PIR
-  By: Nathan Seidle and Fischer Moseley and Priyanka Makin
+  By: Andy England and Priyanka Makin
   SparkFun Electronics
   Date: February 10, 2021
   License: This code is public domain but you buy me a beer if you use this and
@@ -88,13 +88,13 @@ volatile memoryMap registerMap {
   DEVICE_ID,           //id
   FIRMWARE_MINOR,      //firmwareMinor
   FIRMWARE_MAJOR,      //firmwareMajor
-  {0, 0, 0, 0},           //eventStatus {objectDetected, objectRemoved, eventAvailable, rawReading}
-  {1},              //interruptConfig {detectEnable, detectEnable}
+  {0, 0, 0, 0},           //eventStatus {rawReading, eventAvailable, objectRemoved, objectDetected}
+  {1},              //interruptConfig {interruptEnable}
   0x02EE,              //eventDebounceTime, default: 750ms
-  {0, 1, 0},           //eventQueueStatus {isFull, isEmpty, popRequest}
+  {0, 1, 0},           //eventQueueStatus {popRequest, isEmpty, isFull}
   0x00000000,          //eventQueueFront
   0x00000000,          //eventQueueBack
-  {0, 1, 0},           //eventQueueStatus {isFull, isEmpty, popRequest}
+  {0, 1, 0},           //eventQueueStatus {popRequest, isEmpty, isFull}
   0x00000000,          //eventQueueFront
   0x00000000,          //eventQueueBack
   DEFAULT_I2C_ADDRESS, //i2cAddress
@@ -105,13 +105,13 @@ memoryMap protectionMap = {
   0x00,       //id
   0x00,       //firmwareMinor
   0x00,       //firmwareMajor
-  {1, 1, 1, 0},  //eventStatus {objectDetected, objectRemoved, eventAvailable, rawReading}
-  {1},        //interruptConfig 
+  {0, 1, 1, 1},  //eventStatus {rawReading, eventAvailble, objectRemoved, objectDetected}
+  {1},        //interruptConfig {interruptEnable}
   0xFFFF,     //eventDebounceTime
-  {1, 0, 0},  //detectQueueStatus {isFull, isEmpty, popRequest}
+  {1, 0, 0},  //detectQueueStatus {popRequest, isEmpty, isFull}
   0x00000000, //detectQueueFront
   0x00000000, //detectQueueBack
-  {1, 0, 0},  //removeQueueStatus {isFull, isEmpty, popRequest}
+  {1, 0, 0},  //removeQueueStatus {popRequest, isEmpty, isFull}
   0x00000000, //removeQueueFront
   0x00000000, //removeQueueBack
   0xFF,       //i2cAddress

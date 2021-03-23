@@ -1,5 +1,5 @@
 /******************************************************************************
-  registers.h
+  queue.h
   Fischer Moseley @ SparkFun Electronics
   Original Creation Date: July 31, 2019
 
@@ -19,12 +19,12 @@
   Distributed as-is; no warranty is given.
 ******************************************************************************/
 
-#define BUTTON_QUEUE_SIZE 15 //How many button events to store in memory.
+#define QUEUE_SIZE 15 //How many events to store in memory.
 
 struct Queue {
 
   //constructor
-  unsigned long buffer[BUTTON_QUEUE_SIZE]; //create array to store timestamps in
+  unsigned long buffer[QUEUE_SIZE]; //create array to store timestamps in
   byte head = 0; //create pointers to the first and last elements
   byte tail = 0;
   bool full = false; //state variable, true if queue is full
@@ -44,12 +44,12 @@ struct Queue {
 
   //Increments the head pointer with wrap around
   void incrementHead() {
-    head = (head + 1) % BUTTON_QUEUE_SIZE;
+    head = (head + 1) % QUEUE_SIZE;
   }
 
   //Incrments the tail pointer with wrap around
   void incrementTail() {
-    tail = (tail + 1) % BUTTON_QUEUE_SIZE;
+    tail = (tail + 1) % QUEUE_SIZE;
   }
 
   //Pushes a value to the top of the buffer, but removes the oldest value if the buffer is full
@@ -73,7 +73,7 @@ struct Queue {
   //Returns the youngest value in the buffer
   unsigned long front() {
     if (!isEmpty()) {
-      return buffer[(head + BUTTON_QUEUE_SIZE - 1) % BUTTON_QUEUE_SIZE];
+      return buffer[(head + QUEUE_SIZE - 1) % QUEUE_SIZE];
     }
     return 0;
   }
@@ -99,7 +99,7 @@ struct Queue {
     Serial.print(tail);
     Serial.println();
 
-    for (int x = 0 ; x < BUTTON_QUEUE_SIZE ; x++) {
+    for (int x = 0 ; x < QUEUE_SIZE ; x++) {
       Serial.print(x);
       if (x < 10) Serial.print(" ");
       Serial.print(":");

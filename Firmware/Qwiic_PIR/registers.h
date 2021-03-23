@@ -1,10 +1,10 @@
 /******************************************************************************
   registers.h
-  Fischer Moseley @ SparkFun Electronics
-  Original Creation Date: July 31, 2019
+  Andy England @ SparkFun Electronics
+  Original Creation Date: February 10, 2021
 
   This file defines the memoryMap struct, which acts as the pseudo register map
-  of the Qwiic Button/Switch. It also serves as an easy way to access variables
+  of the Qwiic PIR. It also serves as an easy way to access variables
   and manipulate the state of the device.
 
   During I2C transactions, the memoryMap object is wrapped as a collection of
@@ -21,10 +21,10 @@
 
 typedef union {
   struct {
-    bool rawReading : 1;
-    bool eventAvailable : 1; //This is bit 0. User mutable, gets set to 1 when a new event occurs. User is expected to write 0 to clear the flag.
-    bool objectRemoved : 1; //Defaults to zero on POR. Gets set to one when the button gets clicked. Must be cleared by the user.
-    bool objectDetected : 1;  //Gets set to one if button is pushed.
+    bool rawReading : 1;  //This is bit 0.
+    bool eventAvailable : 1; //User mutable, gets set to 1 when a new event occurs. User is expected to write 0 to clear the flag.
+    bool objectRemoved : 1; //Defaults to zero on POR. Gets set to one when object is removed from in front of PIR.
+    bool objectDetected : 1;  //Defaults to zero on POR. Gets set to one when object is detected in front of PIR.
     bool : 4;
   };
   uint8_t byteWrapped;
